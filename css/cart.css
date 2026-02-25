@@ -1,0 +1,7 @@
+
+.cart{position:fixed;right:-350px;top:0;width:350px;height:100%;background:white;box-shadow:-2px 0 10px rgba(0,0,0,0.1);padding:20px;transition:0.3s;overflow:auto}
+.cart.active{right:0}
+.cart-item{display:flex;justify-content:space-between;margin-bottom:15px}
+.qty-btn{padding:2px 8px;margin:0 5px;border:none;background:#ddd;cursor:pointer}
+.total{font-weight:bold;margin-top:20px;font-size:18px}
+.close-cart{float:right;cursor:pointer;font-size:20px}

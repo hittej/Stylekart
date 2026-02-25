@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>Login</title></head>
+<body>
+<h2>Email Login</h2>
+<input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+<button onclick="signupEmail()">Signup</button>
+<button onclick="loginEmail()">Login</button>
+
+<hr>
+
+<h2>Mobile Login</h2>
+<input id="phone" placeholder="+91XXXXXXXXXX"><br><br>
+<div id="recaptcha-container"></div>
+<button onclick="sendOTP()">Send OTP</button><br><br>
+<input id="otp" placeholder="Enter OTP"><br><br>
+<button onclick="verifyOTP()">Verify OTP</button>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="../firebase/config.js"></script>
+
+<script>
+function signupEmail(){ auth.createUserWithEmailAndPassword(email.value, password.value); }
+function loginEmail(){ auth.signInWithEmailAndPassword(email.value, password.value); }
+
+window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+let confirmationResult;
+
+function sendOTP(){
+  auth.signInWithPhoneNumber(phone.value, recaptchaVerifier)
+  .then(result => { confirmationResult = result; alert("OTP sent"); });
+}
+function verifyOTP(){ confirmationResult.confirm(otp.value); }
+</script>
+</body>
+</html>

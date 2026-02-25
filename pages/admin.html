@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>Admin Panel</title></head>
+<body>
+<h2>Upload Product</h2>
+<input id="name" placeholder="Product Name"><br><br>
+<input id="price" type="number" placeholder="Price"><br><br>
+<input id="image" type="file"><br><br>
+<button onclick="uploadProduct()">Upload</button>
+
+<hr><h2>Orders</h2>
+<div id="orders"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="../firebase/config.js"></script>
+
+<script>
+auth.onAuthStateChanged(user=>{
+  if(!user || user.email !== "YOUR_ADMIN_EMAIL"){
+    alert("Not authorized");
+    window.location.href = "../index.html";
+  }
+});
+
+async function uploadProduct(){
+  const name = document.getElementById("name").value;
+  const price = Number(document.getElementById("price").value);
+  const file = document.getElementById("image").files[0];
+  const storageRef = storage.ref("products/" + file.name);
+  await storageRef.put(file);
+  const imageUrl = await storageRef.getDownloadURL();
+  await db.collection("products").add({ name, price, image: imageUrl });
+  alert("Product uploaded!");
+}
+
+async function loadOrders(){
+  const snapshot = await db.collection("orders").orderBy("createdAt","desc").get();
+  snapshot.forEach(doc=>{
+    const order = doc.data();
+    document.getElementById("orders").innerHTML += `
+      <hr>User: ${order.userId}<br>Total: ₹${order.total}`;
+  });
+}
+loadOrders();
+</script>
+</body>
+</html>

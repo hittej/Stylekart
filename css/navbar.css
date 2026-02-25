@@ -1,0 +1,5 @@
+
+.navbar{background:white;display:flex;align-items:center;justify-content:space-between;padding:15px 40px;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+.logo{font-size:22px;font-weight:bold;color:#ff3f6c}
+.search-box{padding:8px 12px;border-radius:6px;border:1px solid #ccc;width:250px}
+.cart-btn{background:#ff3f6c;color:white;border:none;padding:10px 15px;border-radius:6px;cursor:pointer}

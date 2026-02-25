@@ -1,0 +1,7 @@
+
+.card{background:white;padding:15px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.05);transition:0.3s}
+.card:hover{transform:translateY(-5px)}
+.card img{width:100%;border-radius:8px}
+.brand{font-weight:bold;margin-top:10px}
+.price{color:#ff3f6c;font-weight:bold;margin-top:5px}
+.add-btn{margin-top:10px;width:100%;padding:10px;border:none;background:#ff3f6c;color:white;border-radius:6px;cursor:pointer}
